@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="background-overlay"></div>
+    
     <div class="container">
         <header>
             <h1>NEXUS QUIZ</h1>
@@ -22,12 +24,12 @@
         
         <div class="quiz-content" id="quiz">
             <div class="question-container">
-                <h2 id="question">QUESTION</h2>
+                <h2 id="question">Loading question...</h2>
                 <div class="options" id="options">
-                    <button class="option" id="option1">Answer</button>
-                    <button class="option" id="option2">Answer</button>
-                    <button class="option" id="option3">Answer</button>
-                    <button class="option" id="option4">Answer</button>
+                    <button class="option" id="option1">Option 1</button>
+                    <button class="option" id="option2">Option 2</button>
+                    <button class="option" id="option3">Option 3</button>
+                    <button class="option" id="option4">Option 4</button>
                 </div>
             </div>
             <div class="controls">
@@ -36,9 +38,9 @@
         </div>
         
         <div class="result" id="result">
-            <h2>Assessment Complete</h2>
+            <h2>Quiz Completed!</h2>
             <div class="score" id="finalScore">Your score: 0/15</div>
-            <button class="btn glow" id="restartBtn">Restart</button>
+            <button class="btn glow" id="restartBtn">Restart Quiz</button>
         </div>
     </div>
 
