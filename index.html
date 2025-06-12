@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS GAME</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>NEXUS</h1>
+            <div class="stats">
+                <span id="score">Score: <span>0</span></span>
+                <span id="level">Level: <span>Easy</span></span>
+                <span id="questionCount">Question: <span>1</span>/15</span>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+        </header>
+        
+        <div class="quiz-content" id="quiz">
+            <div class="question-container">
+                <h2 id="question">QUESTION</h2>
+                <div class="options" id="options">
+                    <button class="option" id="option1">Answer</button>
+                    <button class="option" id="option2">Answer</button>
+                    <button class="option" id="option3">Answer</button>
+                    <button class="option" id="option4">Answer</button>
+                </div>
+            </div>
+            <div class="controls">
+                <button class="btn" id="nextBtn" disabled>Continue</button>
+            </div>
+        </div>
+        
+        <div class="result" id="result">
+            <h2>Assessment Complete</h2>
+            <div class="score" id="finalScore">Your score: 0/15</div>
+            <button class="btn glow" id="restartBtn">Restart</button>
+        </div>
+    </div>
+
+    <div class="social-links">
+        <a href="https://x.com/NexusLabs" class="social-link" target="_blank">Twitter</a>
+        <a href="https://discord.gg/nexus-xyz" class="social-link" target="_blank">Discord</a>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
