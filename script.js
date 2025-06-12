@@ -1,6 +1,4 @@
-// Quiz data
 const quizData = [
-    // Easy questions
     {
         question: "What is the main goal of the Nexus project?",
         options: [
@@ -56,7 +54,6 @@ const quizData = [
         answer: 2,
         level: "easy"
     },
-    // Medium questions
     {
         question: "What is NVM (Nexus Virtual Machine)?",
         options: [
@@ -112,7 +109,6 @@ const quizData = [
         answer: 1,
         level: "medium"
     },
-    // Hard questions
     {
         question: "What is Proof-Carrying Data (PCD)?",
         options: [
@@ -171,7 +167,6 @@ const quizData = [
 ];
 
 document.addEventListener('DOMContentLoaded', function() {
-    // DOM elements
     const questionElement = document.getElementById('question');
     const optionElements = [
         document.getElementById('option1'),
@@ -189,13 +184,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const finalScoreElement = document.getElementById('finalScore');
     const restartButton = document.getElementById('restartBtn');
     
-    // Quiz state
     let currentQuestionIndex = 0;
     let score = 0;
     let selectedOption = null;
     let answerChecked = false;
     
-    // Initialize quiz
     function initQuiz() {
         currentQuestionIndex = 0;
         score = 0;
@@ -208,7 +201,6 @@ document.addEventListener('DOMContentLoaded', function() {
         loadQuestion();
     }
     
-    // Load question
     function loadQuestion() {
         answerChecked = false;
         resetState();
@@ -221,55 +213,44 @@ document.addEventListener('DOMContentLoaded', function() {
             optionElements[index].addEventListener('click', selectOption);
         });
         
+        updateProgress();
+    }
+    
+    function updateProgress() {
         progressBar.style.width = `${((currentQuestionIndex + 1) / quizData.length) * 100}%`;
         scoreElement.textContent = score;
         questionCountElement.textContent = `${currentQuestionIndex + 1}/${quizData.length}`;
         levelElement.textContent = currentQuestion.level.charAt(0).toUpperCase() + currentQuestion.level.slice(1);
-        
-        nextButton.disabled = true;
-        nextButton.textContent = 'Continue';
     }
     
-    // Reset question state
     function resetState() {
         selectedOption = null;
         nextButton.disabled = true;
-        optionElements.forEach(option => {
-            option.classList.remove('selected');
-        });
+        nextButton.textContent = 'Continue';
+        optionElements.forEach(option => option.classList.remove('selected'));
     }
     
-    // Select option
     function selectOption(e) {
         if (answerChecked) return;
         
-        const selectedElement = e.target;
-        selectedOption = optionElements.indexOf(selectedElement);
-        
-        optionElements.forEach(option => {
-            option.classList.remove('selected');
-        });
-        selectedElement.classList.add('selected');
-        
+        selectedOption = optionElements.indexOf(e.target);
+        optionElements.forEach(option => option.classList.remove('selected'));
+        e.target.classList.add('selected');
         nextButton.disabled = false;
     }
     
-    // Check answer
     function checkAnswer() {
-        if (selectedOption === null || answerChecked) return;
+        if (answerChecked || selectedOption === null) return;
         
         answerChecked = true;
-        const currentQuestion = quizData[currentQuestionIndex];
-        const correctIndex = currentQuestion.answer;
+        const correctIndex = quizData[currentQuestionIndex].answer;
         
-        optionElements.forEach(option => {
-            option.removeEventListener('click', selectOption);
-        });
+        optionElements.forEach(option => option.removeEventListener('click', selectOption));
         
         optionElements.forEach((option, index) => {
             if (index === correctIndex) {
                 option.classList.add('correct');
-            } else if (index === selectedOption && index !== correctIndex) {
+            } else if (index === selectedOption) {
                 option.classList.add('incorrect');
             }
         });
@@ -280,21 +261,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         currentQuestionIndex++;
-        if (currentQuestionIndex < quizData.length) {
-            nextButton.textContent = 'Next Question';
-        } else {
-            nextButton.textContent = 'See Results';
-        }
+        nextButton.textContent = currentQuestionIndex < quizData.length ? 'Next Question' : 'See Results';
     }
     
-    // Show results
     function showResults() {
         quizContainer.style.display = 'none';
         resultContainer.style.display = 'block';
         finalScoreElement.textContent = `Your score: ${score}/${quizData.length}`;
     }
     
-    // Event listeners
     nextButton.addEventListener('click', () => {
         if (!answerChecked) {
             checkAnswer();
@@ -309,6 +284,5 @@ document.addEventListener('DOMContentLoaded', function() {
     
     restartButton.addEventListener('click', initQuiz);
     
-    // Start quiz
     initQuiz();
 });
