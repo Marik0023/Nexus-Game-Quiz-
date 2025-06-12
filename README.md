@@ -2,7 +2,7 @@
 
 Game description:
 
-- Nexus Game | QUIZ is a stylish interactive quiz that tests your knowledge of Nexus technologies (zkVM, NVM, IVC and other concepts).
+- Nexus Game | QUIZ is a stylish interactive quiz that tests your knowledge of Nexus technologies (zkVM, NVM, IVC and other concepts)
 
 
 
