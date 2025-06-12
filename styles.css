@@ -1,12 +1,10 @@
 :root {
     --primary: #00f0ff;
     --secondary: #0066ff;
-    --bg-dark: #0a0a12;
-    --bg-darker: #050508;
+    --bg-dark: rgba(10, 10, 18, 0.85);
     --text-light: #e0e0ff;
     --text-lighter: #ffffff;
     --border: rgba(0, 240, 255, 0.3);
-    --grid-color: rgba(0, 240, 255, 0.05);
 }
 
 * {
@@ -17,60 +15,43 @@
 }
 
 body {
-    background-color: var(--bg-dark);
-    color: var(--text-light);
-    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: url('https://i.ibb.co/LXT93b30/background.png') no-repeat center center/cover;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
-    line-height: 1.6;
     position: relative;
-    overflow: hidden;
 }
 
-body::before {
-    content: '';
-    position: absolute;
+.background-overlay {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: 
-        linear-gradient(var(--grid-color) 1px, transparent 1px),
-        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-    background-size: 40px 40px;
-    opacity: 0.3;
-    z-index: -1;
-}
-
-body::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle at center, transparent 0%, var(--bg-dark) 70%);
+    background-color: rgba(0, 0, 0, 0.4); /* Змінено на 40% прозорості */
     z-index: -1;
 }
 
 .container {
     width: 100%;
     max-width: 800px;
-    background-color: rgba(10, 10, 18, 0.8);
+    background-color: var(--bg-dark);
     border: 1px solid var(--border);
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 0 30px rgba(0, 240, 255, 0.1);
-    backdrop-filter: blur(5px);
+    margin: 20px;
 }
 
+/* Решта стилів залишаються без змін */
 header {
     padding: 25px;
     border-bottom: 1px solid var(--border);
     position: relative;
-    overflow: hidden;
 }
 
 header::after {
@@ -204,15 +185,9 @@ h2::before {
 }
 
 @keyframes pulse {
-    0% {
-        box-shadow: 0 0 5px rgba(0, 240, 255, 0.5);
-    }
-    50% {
-        box-shadow: 0 0 20px rgba(0, 240, 255, 0.8);
-    }
-    100% {
-        box-shadow: 0 0 5px rgba(0, 240, 255, 0.5);
-    }
+    0% { box-shadow: 0 0 5px rgba(0, 240, 255, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(0, 240, 255, 0.8); }
+    100% { box-shadow: 0 0 5px rgba(0, 240, 255, 0.5); }
 }
 
 .controls {
@@ -257,11 +232,6 @@ h2::before {
     font-size: 1.8rem;
     margin-bottom: 20px;
     padding-left: 0;
-    text-align: center;
-}
-
-.result h2::before {
-    display: none;
 }
 
 .score {
@@ -270,7 +240,6 @@ h2::before {
     color: var(--text-lighter);
 }
 
-/* Answer states */
 .correct {
     background-color: rgba(0, 255, 100, 0.1) !important;
     border-color: #00ff64 !important;
@@ -292,35 +261,15 @@ h2::before {
     opacity: 0.7;
 }
 
-/* Glow effects */
 .glow {
     animation: glow 2s infinite alternate;
 }
 
 @keyframes glow {
-    from {
-        box-shadow: 0 0 5px rgba(0, 240, 255, 0.5);
-    }
-    to {
-        box-shadow: 0 0 20px rgba(0, 240, 255, 0.8);
-    }
+    from { box-shadow: 0 0 5px rgba(0, 240, 255, 0.5); }
+    to { box-shadow: 0 0 20px rgba(0, 240, 255, 0.8); }
 }
 
-/* Grid pattern animation */
-@keyframes gridMove {
-    0% {
-        background-position: 0 0;
-    }
-    100% {
-        background-position: 40px 40px;
-    }
-}
-
-body::before {
-    animation: gridMove 20s linear infinite;
-}
-
-/* Social links */
 .social-links {
     position: fixed;
     bottom: 20px;
@@ -329,7 +278,6 @@ body::before {
     display: flex;
     justify-content: center;
     gap: 20px;
-    z-index: 10;
 }
 
 .social-link {
@@ -349,25 +297,9 @@ body::before {
 }
 
 @media (max-width: 600px) {
-    h1 {
-        font-size: 1.8rem;
-    }
-    
-    .quiz-content {
-        padding: 20px;
-    }
-    
-    h2 {
-        font-size: 1.2rem;
-    }
-    
-    .option {
-        padding: 12px 15px;
-    }
-    
-    .social-links {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-    }
+    h1 { font-size: 1.8rem; }
+    .quiz-content { padding: 20px; }
+    h2 { font-size: 1.2rem; }
+    .option { padding: 12px 15px; }
+    .social-links { flex-direction: column; align-items: center; gap: 10px; }
 }
