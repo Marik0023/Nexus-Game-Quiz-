@@ -1,4 +1,4 @@
-const quizData = [
+const quizDataTest1 = [
     {
         question: "What is the main goal of the Nexus project?",
         options: [
@@ -166,6 +166,186 @@ const quizData = [
     }
 ];
 
+const quizDataTest2 = [
+    {
+        question: "What class of computations is the main focus of Nexus L1?",
+        options: [
+            "Only financial transactions",
+            "Arbitrary Turing-complete computations",
+            "Only machine learning",
+            "Only static websites"
+        ],
+        answer: 1,
+        level: "easy"
+    },
+    {
+        question: "How does Nexus differ from traditional blockchains in its approach to trust?",
+        options: [
+            "Uses centralized guarantees",
+            "Replaces trust with mathematical proofs",
+            "Requires user identification",
+            "Doesn't require any computations"
+        ],
+        answer: 1,
+        level: "easy"
+    },
+    {
+        question: "What type of network does Nexus use to achieve global scale?",
+        options: [
+            "Hierarchical node structure",
+            "Decentralized homogeneous network",
+            "Federated clusters",
+            "Mobile mesh networks"
+        ],
+        answer: 1,
+        level: "easy"
+    },
+    {
+        question: "How does Nexus define 'practical decentralization'?",
+        options: [
+            "By the number of tokens in the fund",
+            "By the ability to participate on ordinary devices",
+            "By having regulatory licenses",
+            "By the number of transactions per second"
+        ],
+        answer: 1,
+        level: "easy"
+    },
+    {
+        question: "What is key to global verification in Nexus?",
+        options: [
+            "Geographic location of servers",
+            "Shared computing proof infrastructure",
+            "Availability of quantum computers",
+            "Use of centralized APIs"
+        ],
+        answer: 1,
+        level: "easy"
+    },
+    {
+        question: "What computation paradigm does Nexus implement?",
+        options: [
+            "Exclusively off-chain computing",
+            "Hybrid stateful/stateless computations",
+            "Only batch processing",
+            "Analog computing"
+        ],
+        answer: 1,
+        level: "medium"
+    },
+    {
+        question: "How does Nexus handle complex computational workflows?",
+        options: [
+            "Uses fixed templates",
+            "Allows composition of arbitrary programs",
+            "Limits call depth",
+            "Requires manual optimization"
+        ],
+        answer: 1,
+        level: "medium"
+    },
+    {
+        question: "Why does Nexus consider its VM unique?",
+        options: [
+            "Because it supports only one language toolkit",
+            "Execution time doesn't depend on computation complexity",
+            "Uses unfalsifiable identifiers",
+            "Works only with 8-bit numbers"
+        ],
+        answer: 1,
+        level: "medium"
+    },
+    {
+        question: "How does Nexus ensure compatibility with existing systems?",
+        options: [
+            "Requires complete code rewrites",
+            "Through emulation of different ISAs and compilation",
+            "Only for Rust programs",
+            "Through a single proprietary interface"
+        ],
+        answer: 1,
+        level: "medium"
+    },
+    {
+        question: "What approach is used for proof optimization?",
+        options: [
+            "Increasing the size of each proof",
+            "Recursive composition and aggregation",
+            "Using only CPU computations",
+            "Limiting the number of operations"
+        ],
+        answer: 1,
+        level: "medium"
+    },
+    {
+        question: "How are network participants rewarded?",
+        options: [
+            "Fixed daily rate",
+            "For contributing computational resources",
+            "Only through token staking",
+            "Exclusively for content publication"
+        ],
+        answer: 1,
+        level: "hard"
+    },
+    {
+        question: "What equipment is needed to participate in the network?",
+        options: [
+            "Specialized ASICs",
+            "Any devices with computing power",
+            "Quantum computers",
+            "Water-cooled servers"
+        ],
+        answer: 1,
+        level: "hard"
+    },
+    {
+        question: "How does Nexus prevent centralization?",
+        options: [
+            "By limiting the number of nodes",
+            "Algorithmic incentives for distribution",
+            "Using geo-fencing",
+            "Banning professional equipment"
+        ],
+        answer: 1,
+        level: "hard"
+    },
+    {
+        question: "How does the system balance between speed and decentralization?",
+        options: [
+            "Sacrifices speed for full decentralization",
+            "Uses adaptive scaling mechanisms",
+            "Works only in local networks",
+            "Limits the number of transactions"
+        ],
+        answer: 1,
+        level: "hard"
+    },
+    {
+        question: "What role do 'coprocessors' play in the architecture?",
+        options: [
+            "Duplicate main computations",
+            "Accelerate specialized operations",
+            "Replace the main VM",
+            "Used only for testing"
+        ],
+        answer: 1,
+        level: "hard"
+    }
+];
+
+// Shuffle options for Test #2 while maintaining correct answers
+quizDataTest2.forEach(question => {
+    const correctAnswer = question.options[question.answer];
+    // Shuffle options
+    for (let i = question.options.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [question.options[i], question.options[j]] = [question.options[j], question.options[i]];
+    }
+    // Update answer index after shuffle
+    question.answer = question.options.indexOf(correctAnswer);
+});
+
 document.addEventListener('DOMContentLoaded', function() {
     const questionElement = document.getElementById('question');
     const optionElements = [
@@ -183,11 +363,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const resultContainer = document.getElementById('result');
     const finalScoreElement = document.getElementById('finalScore');
     const restartButton = document.getElementById('restartBtn');
+    const test1Btn = document.getElementById('test1Btn');
+    const test2Btn = document.getElementById('test2Btn');
     
     let currentQuestionIndex = 0;
     let score = 0;
     let selectedOption = null;
     let answerChecked = false;
+    let currentQuizData = quizDataTest1;
     
     function initQuiz() {
         currentQuestionIndex = 0;
@@ -204,7 +387,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function loadQuestion() {
         answerChecked = false;
         resetState();
-        const currentQuestion = quizData[currentQuestionIndex];
+        const currentQuestion = currentQuizData[currentQuestionIndex];
         
         questionElement.textContent = currentQuestion.question;
         currentQuestion.options.forEach((option, index) => {
@@ -217,10 +400,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function updateProgress() {
-        progressBar.style.width = `${((currentQuestionIndex + 1) / quizData.length) * 100}%`;
+        progressBar.style.width = `${((currentQuestionIndex + 1) / currentQuizData.length) * 100}%`;
         scoreElement.textContent = score;
-        questionCountElement.textContent = `${currentQuestionIndex + 1}/${quizData.length}`;
-        levelElement.textContent = currentQuestion.level.charAt(0).toUpperCase() + currentQuestion.level.slice(1);
+        questionCountElement.textContent = `${currentQuestionIndex + 1}/${currentQuizData.length}`;
+        levelElement.textContent = currentQuizData[currentQuestionIndex].level.charAt(0).toUpperCase() + currentQuizData[currentQuestionIndex].level.slice(1);
     }
     
     function resetState() {
@@ -243,7 +426,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (answerChecked || selectedOption === null) return;
         
         answerChecked = true;
-        const correctIndex = quizData[currentQuestionIndex].answer;
+        const correctIndex = currentQuizData[currentQuestionIndex].answer;
         
         optionElements.forEach(option => option.removeEventListener('click', selectOption));
         
@@ -261,20 +444,20 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         currentQuestionIndex++;
-        nextButton.textContent = currentQuestionIndex < quizData.length ? 'Next Question' : 'See Results';
+        nextButton.textContent = currentQuestionIndex < currentQuizData.length ? 'Next Question' : 'See Results';
     }
     
     function showResults() {
         quizContainer.style.display = 'none';
         resultContainer.style.display = 'block';
-        finalScoreElement.textContent = `Your score: ${score}/${quizData.length}`;
+        finalScoreElement.textContent = `Your score: ${score}/${currentQuizData.length}`;
     }
     
     nextButton.addEventListener('click', () => {
         if (!answerChecked) {
             checkAnswer();
         } else {
-            if (currentQuestionIndex < quizData.length) {
+            if (currentQuestionIndex < currentQuizData.length) {
                 loadQuestion();
             } else {
                 showResults();
@@ -283,6 +466,20 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     restartButton.addEventListener('click', initQuiz);
+    
+    test1Btn.addEventListener('click', () => {
+        currentQuizData = quizDataTest1;
+        test1Btn.classList.add('active');
+        test2Btn.classList.remove('active');
+        initQuiz();
+    });
+    
+    test2Btn.addEventListener('click', () => {
+        currentQuizData = quizDataTest2;
+        test2Btn.classList.add('active');
+        test1Btn.classList.remove('active');
+        initQuiz();
+    });
     
     initQuiz();
 });
