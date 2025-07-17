@@ -32,7 +32,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); /* Змінено на 40% прозорості */
+    background-color: rgba(0, 0, 0, 0.4);
     z-index: -1;
 }
 
@@ -47,7 +47,6 @@ body {
     margin: 20px;
 }
 
-/* Решта стилів залишаються без змін */
 header {
     padding: 25px;
     border-bottom: 1px solid var(--border);
@@ -122,6 +121,23 @@ h1::after {
     background: linear-gradient(90deg, var(--primary), var(--secondary));
     width: 0%;
     transition: width 0.4s ease;
+}
+
+.test-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.test-btn {
+    padding: 8px 15px;
+    font-size: 0.8rem;
+}
+
+.test-btn.active {
+    background: rgba(0, 240, 255, 0.2);
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
 }
 
 .quiz-content {
