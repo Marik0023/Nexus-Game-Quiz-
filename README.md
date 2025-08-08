@@ -29,3 +29,4 @@ Update 0.2
 
 Description:
 
+Added Test 3 — even more interesting questions, mostly technical. There are also easy, medium, and hard levels. Good luck to everyone!
