@@ -126,13 +126,15 @@ h1::after {
 .test-buttons {
     display: flex;
     justify-content: center;
-    gap: 15px;
+    gap: 10px;
     margin-top: 15px;
+    flex-wrap: wrap;
 }
 
 .test-btn {
-    padding: 8px 15px;
+    padding: 8px 12px;
     font-size: 0.8rem;
+    min-width: 80px;
 }
 
 .test-btn.active {
@@ -318,4 +320,6 @@ h2::before {
     h2 { font-size: 1.2rem; }
     .option { padding: 12px 15px; }
     .social-links { flex-direction: column; align-items: center; gap: 10px; }
+    .test-buttons { gap: 8px; }
+    .test-btn { padding: 6px 10px; font-size: 0.7rem; min-width: 70px; }
 }
