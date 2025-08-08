@@ -334,16 +334,186 @@ const quizDataTest2 = [
     }
 ];
 
-// Shuffle options for Test #2 while maintaining correct answers
-quizDataTest2.forEach(question => {
-    const correctAnswer = question.options[question.answer];
-    // Shuffle options
-    for (let i = question.options.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [question.options[i], question.options[j]] = [question.options[j], question.options[i]];
+const quizDataTest3 = [
+    {
+        question: "What is Universal Proof in Nexus?",
+        options: [
+            "NFT certificate",
+            "Cryptographic proof of correctness for any computation",
+            "Voting token",
+            "Mining tool"
+        ],
+        answer: 1,
+        level: "easy"
+    },
+    {
+        question: "How many main layers are in the Nexus stack?",
+        options: [
+            "1",
+            "3 (Consensus, Execution, Storage)",
+            "5",
+            "10"
+        ],
+        answer: 1,
+        level: "easy"
+    },
+    {
+        question: "Which layer is responsible for economic security in Nexus?",
+        options: [
+            "Consensus Layer",
+            "Execution Layer",
+            "Storage Layer",
+            "AI Layer"
+        ],
+        answer: 0,
+        level: "easy"
+    },
+    {
+        question: "What is a 'capital supercomputer'?",
+        options: [
+            "Supercomputer for Big Data processing",
+            "Data bank",
+            "Cloud service for investors",
+            "System where computations are protected by global economic incentives"
+        ],
+        answer: 3,
+        level: "easy"
+    },
+    {
+        question: "Which programming language is supported by zkVM 3.0?",
+        options: [
+            "Python",
+            "Rust",
+            "Solidity",
+            "JavaScript"
+        ],
+        answer: 1,
+        level: "easy"
+    },
+    {
+        question: "What replaced Merkle trees for memory verification in zkVM 3.0?",
+        options: [
+            "Quantum encryption",
+            "LogUps (logarithmic derivatives)",
+            "SHA-256",
+            "RSA keys"
+        ],
+        answer: 1,
+        level: "medium"
+    },
+    {
+        question: "Which architecture is used for consensus scaling in Nexus?",
+        options: [
+            "Merkle tree",
+            "Binary heaps",
+            "DAG (Directed Acyclic Graph)",
+            "Chain blocks"
+        ],
+        answer: 2,
+        level: "medium"
+    },
+    {
+        question: "What is S-two prover?",
+        options: [
+            "Transparent STARK-prover without trusted setup",
+            "Mining tool",
+            "Data compression algorithm",
+            "Smart contract language"
+        ],
+        answer: 0,
+        level: "medium"
+    },
+    {
+        question: "Which type of fields does zkVM 3.0 use for optimization?",
+        options: [
+            "Galois fields",
+            "Mersenne prime fields (M31)",
+            "Binary fields",
+            "Elliptic curves"
+        ],
+        answer: 1,
+        level: "medium"
+    },
+    {
+        question: "What is the goal of phase 10 in the consensus roadmap?",
+        options: [
+            "Limit the number of validators",
+            "Achieve $1 trillion in economic security",
+            "Transition to quantum computers",
+            "Centralize the network"
+        ],
+        answer: 1,
+        level: "medium"
+    },
+    {
+        question: "How does LogUps verify memory access without storing its entire state?",
+        options: [
+            "Uses data compression",
+            "Applies compact digests for read/write operations",
+            "Ignores memory verification",
+            "Encrypts data"
+        ],
+        answer: 1,
+        level: "hard"
+    },
+    {
+        question: "Why does zkVM 3.0 use two-phase execution?",
+        options: [
+            "To avoid any computations",
+            "To avoid using recursion",
+            "To increase execution time",
+            "To optimize trace generation through fixed memory layout"
+        ],
+        answer: 3,
+        level: "hard"
+    },
+    {
+        question: "What problem arises from 'monolithic trace' in zkVM 3.0?",
+        options: [
+            "Large proofs due to unused columns and global dependencies",
+            "Reduced proof size",
+            "Inability to use RISC-V",
+            "Lack of Rust support"
+        ],
+        answer: 0,
+        level: "hard"
+    },
+    {
+        question: "How does HotStuff-2 improve consensus in Nexus?",
+        options: [
+            "Increases transactions per second",
+            "Excludes delegated staking",
+            "Requires fewer nodes",
+            "Reduces latency in BFT protocols"
+        ],
+        answer: 3,
+        level: "hard"
+    },
+    {
+        question: "How will 'component traces' in future zkVM versions improve the system?",
+        options: [
+            "Allow parallel proving and modularity",
+            "Limit the number of instructions",
+            "Eliminate the need for consensus",
+            "Make proving centralized"
+        ],
+        answer: 0,
+        level: "hard"
     }
-    // Update answer index after shuffle
-    question.answer = question.options.indexOf(correctAnswer);
+];
+
+// Shuffle options for Test #2 and Test #3 while maintaining correct answers
+[quizDataTest2, quizDataTest3].forEach(quizData => {
+    quizData.forEach(question => {
+        const correctAnswer = question.options[question.answer];
+        // Shuffle options
+        for (let i = question.options.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [question.options[i], question.options[j]] = [question.options[j], question.options[i]];
+        }
+        // Update answer index after shuffle
+        question.answer = question.options.indexOf(correctAnswer);
+    });
 });
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -365,6 +535,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const restartButton = document.getElementById('restartBtn');
     const test1Btn = document.getElementById('test1Btn');
     const test2Btn = document.getElementById('test2Btn');
+    const test3Btn = document.getElementById('test3Btn');
     
     let currentQuestionIndex = 0;
     let score = 0;
@@ -471,6 +642,7 @@ document.addEventListener('DOMContentLoaded', function() {
         currentQuizData = quizDataTest1;
         test1Btn.classList.add('active');
         test2Btn.classList.remove('active');
+        test3Btn.classList.remove('active');
         initQuiz();
     });
     
@@ -478,6 +650,15 @@ document.addEventListener('DOMContentLoaded', function() {
         currentQuizData = quizDataTest2;
         test2Btn.classList.add('active');
         test1Btn.classList.remove('active');
+        test3Btn.classList.remove('active');
+        initQuiz();
+    });
+    
+    test3Btn.addEventListener('click', () => {
+        currentQuizData = quizDataTest3;
+        test3Btn.classList.add('active');
+        test1Btn.classList.remove('active');
+        test2Btn.classList.remove('active');
         initQuiz();
     });
     
